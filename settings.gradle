@@ -1,0 +1,4 @@
+rootProject.name = 'liferay-spring-vuejs'
+
+include 'spring-app'
+include 'vuejs-app'

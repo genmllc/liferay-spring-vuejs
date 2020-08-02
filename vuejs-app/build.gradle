@@ -1,0 +1,69 @@
+plugins {
+    id "com.github.node-gradle.node" version "2.2.4"
+}
+
+apply plugin: 'base'
+
+node {
+    /* gradle-node-plugin configuration
+       https://github.com/srs/gradle-node-plugin/blob/master/docs/node.md
+
+       Task name pattern:
+       ./gradlew npm_<command> Executes an NPM command.
+    */
+
+    // If true, it will download node using above parameters.
+    // If false, it will try to use globally installed node.
+    download = true
+}
+
+// TODO : make the env dynamic
+// Maybe via gradle.properties ?
+task npmServe(type: NpmTask) {
+  args = ['run', 'serve', '-- --mode development']
+}
+
+task npmTest(type: NpmTask) {
+  args = ['run', 'test:unit']
+}
+
+task npmLint(type: NpmTask) {
+  args = ['run', 'lint']
+}
+
+task npmStop(type: NpmTask) {
+  args = ['stop']
+}
+
+// pack output of the build into JAR file
+task packageApp(type: Zip) {
+	group 'node'
+    dependsOn npm_run_build
+    baseName 'vuejs-app'
+    extension 'jar'
+    destinationDir file("${projectDir}/dist_jar")
+    from('dist') {
+        // optional path under which output will be visible in Java classpath, e.g. static resources path
+        into ''
+    }
+}
+
+// declare a dedicated scope for publishing the packaged JAR
+configurations {
+    npmResources
+}
+configurations.default.extendsFrom(configurations.npmResources)
+
+// expose the artifact created by the packaging task
+artifacts {
+    npmResources(packageApp.archiveFile) {
+        builtBy packageApp
+        type 'jar'
+    }
+}
+
+assemble.dependsOn packageApp
+
+clean {
+    delete packageApp.archiveFile
+}

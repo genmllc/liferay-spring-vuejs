@@ -1,7 +1,16 @@
-.gradle/
+.gradle
+.idea
+.idea/
 .sass-cache/
 build/
 target/
 /.classpath
+.classpath
 /.project
+.project
 /.settings
+.settings
+node_modules/
+dist/
+dist_jar/
+bin/
