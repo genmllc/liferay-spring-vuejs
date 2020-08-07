@@ -85,25 +85,14 @@ war {
 		}
 	}
 
-	// TODO : make it dynamic
-	archiveName 'liferay-spring-vuejs.war'
+	archiveBaseName = 'liferay-spring-vuejs'
 	includeEmptyDirs = false
-
-	doLast {
-		copy {
-			from war.archiveFile
-			into "../../liferay/bundles/deploy"
-		}
-	}
 }
 
 // Deploys the war on Liferay server
-task deploy {
+task deploy(type: Copy) {
 	group 'build'
 	dependsOn war
-	copy {
-		from war.archiveFile
-		// TODO : make it dynamic
-		into "../../liferay/bundles/deploy"
-	}
+	from war.archivePath
+	into "../../liferay/bundles/deploy"
 }

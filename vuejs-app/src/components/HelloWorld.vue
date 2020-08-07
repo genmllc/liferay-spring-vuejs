@@ -121,6 +121,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 
+// TODO : https://levelup.gitconnected.com/enhance-your-http-request-with-axios-and-typescript-f52a6c6c2c8e
 @Component
 export default class HelloWorld extends Vue {
   @Prop() private msg!: string;

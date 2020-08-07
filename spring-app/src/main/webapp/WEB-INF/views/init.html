@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- TODO : load namespace and make the js variable global -->
+
+<script xmlns:th:inline="javascript">
+var namespace = /*[[${namespace}]]*/ "";
+</script>
 <div xmlns:th="http://www.thymeleaf.org">
 	<div th:insert="index :: vuejs">  </div>
 </div>
