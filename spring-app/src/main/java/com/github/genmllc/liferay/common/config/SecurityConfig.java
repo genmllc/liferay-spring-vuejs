@@ -70,14 +70,15 @@ public class SecurityConfig extends SpringSecurityPortletConfigurer  {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.addFilterBefore(new LiferayAuthenticationFilter(), RememberMeAuthenticationFilter.class);
 		// The path must be declared by specificity order.
-		http.authorizeRequests()
+ 		http.authorizeRequests()
 				.antMatchers("/api/services/admin/**").hasRole("Administrator")
 				.antMatchers("/api/services/**").hasRole("User")
 				.antMatchers("/api/resources/**").authenticated()
-				.antMatchers("/api/**").denyAll().and()
+				.antMatchers("/api/**").denyAll()
+				.and()
 			.exceptionHandling()//
 				.authenticationEntryPoint(authenticationEntryPoint())//
-				.accessDeniedHandler(accessDeniedHandler());
+				.accessDeniedHandler(accessDeniedHandler()); 
 		http.cors().and().csrf().csrfTokenRepository(customCookieCsrfTokenRepository());
 	}
 

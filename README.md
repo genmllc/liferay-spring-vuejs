@@ -21,9 +21,7 @@ Step 2 : In spring-app/build.gradle, update the path to Liferay's deploy folder 
 Step 3 : Launch Deploy task
 ```
 
-## Running the tests
-
-TODO
+## Some important stuff
 
 ### Renaming the App
 
@@ -70,6 +68,16 @@ By the portal, Authentication relies on Liferay's. The filter checks if Liferay 
 If it can, then the user is considered "authenticated", his Liferay's Role are then transcripted as Spring's Authorities.
 Liferay's User Interface is used as the Spring Principal so you can access it easily in your controllers.
 
+IMPORTANT : if you plan to use CSRF, you must add an exception in Liferay's System properties : 
+```
+cookie.http.only.names.excludes=XSRF-TOKEN
+```
+Otherwise, your cookie will be httponly and you won't be able to access it with Javascript.
+The file is located in portal-impl.jar so, if you're like me et don't want to rebuild Liferay, you can just overwrite an existing jar with the following command : 
+```
+jar uf portal-impl.jar system.properties
+```
+So get the original file on Github, add your property and override the shit out of it.
 
 ### CSS
 
@@ -87,6 +95,9 @@ If not, your styles will conflict with Liferay's.
 </style>
 ```
 
+### Tests
+
+TODO
 
 ## Built With
 
