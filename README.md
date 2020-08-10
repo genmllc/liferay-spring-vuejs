@@ -73,7 +73,7 @@ IMPORTANT : if you plan to use CSRF, you must add an exception in Liferay's Syst
 cookie.http.only.names.excludes=XSRF-TOKEN
 ```
 Otherwise, your cookie will be httponly and you won't be able to access it with Javascript.
-The file is located in portal-impl.jar so, if you're like me et don't want to rebuild Liferay, you can just overwrite an existing jar with the following command : 
+The file is located in portal-impl.jar so, if you're like me et don't want to rebuild Liferay, you can just overwrite a file inside an existing jar with the following command : 
 ```
 jar uf portal-impl.jar system.properties
 ```
