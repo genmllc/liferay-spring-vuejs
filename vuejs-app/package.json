@@ -11,7 +11,7 @@
   "dependencies": {
     "@types/underscore": "^1.10.19",
     "@types/underscore.string": "0.0.38",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "underscore": "^1.10.2",
     "underscore.string": "^3.3.5",
